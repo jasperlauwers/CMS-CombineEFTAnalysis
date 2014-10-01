@@ -429,8 +429,14 @@ for section in fit_sections:
         getattr(theWS, 'import')(dibosonPdf_norm_sum)
     
     theWS.Print()
-    
-    fout = TFile('%s_%s_%s_ws.root'%(codename,par1name,par2name), 'recreate')
+
+    fout = None
+    if dimension == 1:
+        fout = TFile('%s_%s_ws.root'%(codename,par1name), 'recreate')
+    elif dimension == 2:
+        fout = TFile('%s_%s_%s_ws.root'%(codename,par1name,par2name), 'recreate')
+    else:
+        print 'You must be kidding me'
     theWS.Write()
     fout.Close()
 
