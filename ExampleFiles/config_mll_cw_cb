@@ -1,4 +1,5 @@
 [Global]
+dimension = 2
 par1Name = cw
 par1Low = -50.
 par1High = 50.
