@@ -344,10 +344,11 @@ for section in fit_sections:
     if dimension == 1:
         dibosonPdf = Roo1DSemiAnalyticPdf('pdf_signal_%s' % codename,
                                           'pdf_signal_%s'  %codename,
+
                                           theObservable,
                                           operator1,
                                           dibosonFunc,
-                                          '%s/signal_%s_%s_%s.root' % (basepath,codename,par1name)
+                                          '%s/signal_%s_%s.root' % (basepath,codename,par1name)
                                           )
     elif dimension == 2:
         dibosonPdf = Roo2DSemiAnalyticPdf('pdf_signal_%s' % codename,
@@ -450,16 +451,17 @@ kmax *  number of nuisance parameters (sources of systematical uncertainties)
     if dimension == 1:
         for i in range(0,Nbkg_int):
             card += """
-            shapes bkg{Nbkg_int}_{codename}\t {codename} ./{codename}_{par1name}_{par2name}_ws.root {codename}:$PROCESS {codename}:$PROCESS_$SYSTEMATIC""".format(Nbkg_int=i+1,codename=codename,norm_sig_sm=norm_sig_sm,norm_bkg=norm_bkg,norm_obs=norm_obs,par1name=par1name,par2name=par2name)
+            shapes bkg{Nbkg_int}_{codename}\t {codename} ./{codename}_{par1name}_ws.root {codename}:$PROCESS {codename}:$PROCESS_$SYSTEMATIC""".format(Nbkg_int=i+1,codename=codename,norm_sig_sm=norm_sig_sm,norm_bkg=norm_bkg,norm_obs=norm_obs,par1name=par1name)
+
         card += """
-        shapes data_obs\t\t\t {codename} ./{codename}_{par1name}_{par2name}_ws.root {codename}:$PROCESS """.format(codename=codename,norm_sig_sm=norm_sig_sm,norm_bkg=norm_bkg,norm_obs=norm_obs,Nbkg_int=Nbkg_int,par1name=par1name,par2name=par2name)
+        shapes data_obs\t\t\t {codename} ./{codename}_{par1name}_ws.root {codename}:$PROCESS """.format(codename=codename,norm_sig_sm=norm_sig_sm,norm_bkg=norm_bkg,norm_obs=norm_obs,Nbkg_int=Nbkg_int,par1name=par1name)
         if (doSignalShape_unc):
             card += """   
-            shapes signal_{codename}\t {codename} ./{codename}_{par1name}_{par2name}_ws.root {codename}:pdf_$PROCESS {codename}:pdf_$PROCESS_$SYSTEMATIC """.format(codename=codename,norm_sig_sm=norm_sig_sm,norm_bkg=norm_bkg,norm_obs=norm_obs,par1name=par1name,par2name=par2name)
+            shapes signal_{codename}\t {codename} ./{codename}_{par1name}_ws.root {codename}:pdf_$PROCESS {codename}:pdf_$PROCESS_$SYSTEMATIC """.format(codename=codename,norm_sig_sm=norm_sig_sm,norm_bkg=norm_bkg,norm_obs=norm_obs,par1name=par1name)
         else:
             card += """   
-            shapes signal_{codename}\t {codename} ./{codename}_{par1name}_{par2name}_ws.root {codename}:pdf_$PROCESS
-            """.format(codename=codename,norm_sig_sm=norm_sig_sm,norm_bkg=norm_bkg,norm_obs=norm_obs,par1name=par1name,par2name=par2name)
+            shapes signal_{codename}\t {codename} ./{codename}_{par1name}_ws.root {codename}:pdf_$PROCESS
+            """.format(codename=codename,norm_sig_sm=norm_sig_sm,norm_bkg=norm_bkg,norm_obs=norm_obs,par1name=par1name)
     elif dimension == 2:
         for i in range(0,Nbkg_int):
             card += """
@@ -554,6 +556,9 @@ kmax *  number of nuisance parameters (sources of systematical uncertainties)
 
     print card
 
-    cardfile = open('%s_%s_%s.txt'%(codename,par1name,par2name),'w')
+    if dimension == 1:
+        cardfile = open('%s_%s.txt'%(codename,par1name),'w')
+    else:
+        cardfile = open('%s_%s_%s.txt'%(codename,par1name,par2name),'w')
     cardfile.write(card)
     cardfile.close
