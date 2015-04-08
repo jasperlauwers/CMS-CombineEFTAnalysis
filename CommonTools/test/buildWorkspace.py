@@ -376,14 +376,14 @@ for section in fit_sections:
                                                         theObservable,
                                                         operator1,
                                                         dibosonFunc_up[i],
-                                                        '%s/signal_%s_%s_%s.root'%(basepath,codename,par1name)
+                                                        '%s/signal_%s_%s.root'%(basepath,codename,par1name)
                                                         )
                 dibosonPdf_down[i] = Roo1DSemiAnalyticPdf('pdf_signal_%s_%sDown'%(codename,name_forCorr),
                                                           '%s'%codename,
                                                           theObservable,
                                                           operator1,
                                                           dibosonFunc_down[i],
-                                                          '%s/signal_%s_%s_%s.root'%(basepath,codename,par1name)
+                                                          '%s/signal_%s_%s.root'%(basepath,codename,par1name)
                                                           )
             elif dimension == 2:
                 dibosonPdf_up[i] = Roo2DSemiAnalyticPdf('pdf_signal_%s_%sUp'%(codename,name_forCorr),
