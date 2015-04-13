@@ -46,8 +46,8 @@ TString par2latex(const TString& parname)
 
 float parmin(const TString& parname)
 {
-  if (parname.EqualTo("LS0") )  return -35;
-  if (parname.EqualTo("LS1") ) return -100;
+  if (parname.EqualTo("LS0") )  return -9;
+  if (parname.EqualTo("LS1") ) return -30;
 
   return -999;
 }
@@ -56,8 +56,8 @@ float parmin(const TString& parname)
 
 float parmax(const TString& parname)
 {
-  if (parname.EqualTo("LS0") )  return 35;
-  if (parname.EqualTo("LS1") ) return 100;
+  if (parname.EqualTo("LS0") )  return 9;
+  if (parname.EqualTo("LS1") ) return 30;
 
   return -999;
 }
@@ -66,8 +66,8 @@ float parmax(const TString& parname)
 
 float parinc(const TString& parname)
 {
-  if (parname.EqualTo("LS0") )  return 0.7;
-  if (parname.EqualTo("LS1") ) return 2.;
+  if (parname.EqualTo("LS0") )  return 0.18;
+  if (parname.EqualTo("LS1") ) return 0.6;
 
   return -999;
 }
